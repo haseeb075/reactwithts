@@ -1,0 +1,207 @@
+// .js
+// let id = 5;
+
+// .ts
+// type inference which you havent giving types it will detect it
+// let id = 5
+
+// Basic Types
+let id: number = 5;
+let company: string = "Traversy Media";
+let isPublished: boolean = true;
+
+let x: any = "Hello";
+// x = true
+// This will not get a complain
+
+let age: number;
+// This will get error because we define its type
+// age = true
+
+// For arrays
+let ids: number[] = [1, 2, 3, 4, 5];
+
+// This will throw some error
+// ids.push('hello')
+
+// This will throw some error
+// let ids: number[] = [1,2,3,4,5, true]
+
+// This will not give some error because we define type any[]
+// let arr: any[] = [1, true, 'hello']
+
+// Tuple:  an array with more than types
+let person: [number, string, boolean] = [1, "Brad", true];
+
+// This will give error because we define type booleans and place 2
+// let person: [number, string, boolean] = [1, 'Brad', 2]
+
+// This will give error because it is expecting in this order
+// let person: [number, string, boolean] = [1, true, 'Brad']
+
+// Tuple Array
+let employee: [number, string][];
+
+employee = [
+  [1, "Braad"],
+  [2, "John"],
+  [3, "Jill"],
+  // [1, 'Braad'], [2, 'John'], [true, 'Jill']
+];
+
+// Union: a variable with more than one types
+let pid: string | number;
+pid = "22"; //or pid=22
+
+// Enum or enumerated type: a set of named constants either numeric or string
+
+enum Direction1 {
+  Up = 1,
+  Down,
+  Left,
+  Right,
+}
+// console.log(Direction1.Up)<
+enum Direction2 {
+  Up = "up",
+  Down = "down",
+  Left = "left",
+  Right = "right",
+}
+// console.log(Direction2)
+
+// Objects
+
+// const user: {id:number , name:string} = {
+//     id: 1,
+//     name: 'john'
+// }
+// Another good way
+type User = { id: number; name: string };
+const user: User = {
+  id: 1,
+  name: "john",
+};
+
+// Type Assertion: is telling compiler that we want to treat an entity as a different type
+
+// One way to do it
+let cid: any = 1;
+let customerID = <number>cid;
+// 2nd way to do it
+let customeID = cid as number;
+// now customer id should be a number (one way)
+// customerID = true // this gives error bcz customerId is number
+
+// using types in Functions
+// x: number=> giving types to parameters
+// ():number => giving type to return value
+function addNum(x: number, y: number): number {
+  return x + y;
+}
+console.log(1, 2);
+
+//console.log(addNum(1,'2')) //giving error to addNum() bcz we are passing values to
+
+// if no return it would be void
+function log(message: string | number): void {
+  console.log(message);
+}
+log(1); //works
+log("hello cheezious"); //works
+// log(false)//donot works
+
+// Interfaces: Custom Type or a specific structure to an object or a function and we can use it just like custom user type object
+
+// note: Primitive: are Data Types other than objects e.g. Number, String, Boolean etc
+
+interface UserInterface {
+  id: number;
+  name: string;
+  age?: number;
+}
+const user1: UserInterface = {
+  id: 1,
+  name: "john",
+};
+
+// In this way,describing objects I am using interface over a type, it's a preference but there are some differences
+
+// Note: A type (objects) can be used with premitives and with unions
+
+// a type can be used as premitives and with unions
+// if we use type that would be fine
+// type Point = number | string
+// const p1: Point = 1
+
+// NOTE: if we use interface that would be give error because no and string only refers to type not interface
+// interface Point = number | string
+// const p1: Point = 1
+
+// BEST ADVICE USE INTERFACES WITH OBJECTS AND TYPES WITH VARIABLES
+
+//optional properties: if we want to make some property optional it would be age? :number
+//readonly properties: If we want to make our property readonly then it would be us
+interface NewUserInterface {
+  readonly uid: number;
+  name: string;
+  age?: number;
+}
+const user2: NewUserInterface = {
+  uid: 1,
+  name: "john",
+};
+// throws error because its not a assing property but read only property
+// user2.uid = 3;
+
+// FUNCTION INTERFACE: We can also use interfaces with functions
+//  it cant assing a string becaue it strictly follows mathfunc interface
+// e.g. (x: number, y:string) bcz mathFunc has (x:number, y:number)
+// We can call same interface for different functions like ADD & SUBTRACT
+
+interface MathFunc {
+  (x: number, y: number): number;
+}
+const add: MathFunc = (x: number, y: number): number => x + y;
+const subtract: MathFunc = (x: number, y: number): number => x - y;
+
+// CLASSES not 
+// classes are used to create objects and we can use multiple objects using classes
+// Now they need some kind of properties associated
+
+class Person {
+  //classes have properties
+  //public by default We can change them into private or protected
+  // PRIVATED: you can actually access this property within the class
+  // e.g. private id: number & whenever you console it outside of it you get an error (brad.id)
+  // PROTECTED: you can actually access this property within the class or the class which is extended from it
+  // e.g. private id: number & whenever you console it outside of it you get an error (brad.id)
+
+  id: number;
+  name: string;
+  // classes also have methods like constructor() which are just functions within a class
+  // constructor will run whenever the class is or whenever the object is instantiated(the moment or instanc whenever the memory is allocated for specific object of that class ) from that class
+  constructor(id: number, name: string) {
+    // console.log(123); // this will show 123 because contructor ran soon I initiated this object of Person
+    // this represents that current class we are in and current instance
+    this.id = id;
+    this.name = name;
+  }
+
+
+    Register(){
+      return 
+  }
+}
+const brad = new Person(1, "brad");
+const mike = new Person(2, "mike");
+console.log(brad, mike); // It will print brad Object as {id:1, name: 'Brad'} and mike as {id:2, name: 'mike}
+
+// Access Modifiers or Data modifiers
+
+// the properties(id, name) defined in class Person are public by default means We can access them and we can change them
+// For Example
+
+brad.id = 5; //this one is fine
+
+// Generics which are basically used
