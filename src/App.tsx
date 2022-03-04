@@ -18,8 +18,7 @@ import Button from "./components/EventProps/Button";
 import Input from "./components/EventProps/Input";
 
 // Style Props
-
-
+import StyledContainer from './components/StyleProps/StyledContainer'
 
 function App() {
   // Passing an Object Props
@@ -28,7 +27,11 @@ function App() {
     last: "Wayne",
   };
   // Passing an Array of Objects Props
-  const nameList = [{ first: "Bruce", last: "Wyne" }, { first: "Clark", last: "Kent" }, { first: "Princess", last: "Wyne" }];
+  const nameList = [
+    { first: "Bruce", last: "Wyne" },
+    { first: "Clark", last: "Kent" },
+    { first: "Princess", last: "Wyne" },
+  ];
 
   return (
     <div className="App">
@@ -36,19 +39,16 @@ function App() {
       <Greet name="Haseeb" messageCount={2} isLoggedIn={true} />
       <Person name={personName} />
       <PersonList names={nameList} />
-      <Status status='error' />
+      <Status status="error" />
       {/* If we pass this status we will not get error. we use a union of string literals */}
       {/* <Status status='poipop' /> */}
 
       {/* CHILDREN PROPS : where your component accept all props from another component*/}
       {/* One scenario of children props */}
-        <Heading>Placeholder text </Heading>
+      <Heading>Placeholder text </Heading>
       {/* 2nd screnario of children props */}
       <Oscar>
-        <Heading>
-        Oscar goes to decaprio
-
-        </Heading>
+        <Heading>Oscar goes to decaprio</Heading>
       </Oscar>
 
       {/* OPTIONAL TYPE : Component type doesnt have to be passed*/}
@@ -58,22 +58,27 @@ function App() {
       <Greet name="Vishwas" isLoggedIn={true} />
 
       {/* EVENT PROPS */}
-{/* For Buttons */}
+      {/* For Buttons */}
 
-     {/* One Variation: When click handler doesnt need parameters and return value */}
-     {/* ===> <Button handleClick={() => {
+      {/* One Variation: When click handler doesnt need parameters and return value */}
+      {/* ===> <Button handleClick={() => {
         console.log('Button Clicked')
       }} /> */}
-    {/* 2nd Variation: When you need the click handler to passed into click handler */}
-    <Button handleClick2={(event, id) => {
-        console.log('Button Clicked', event, id)
-      }} />
-    
-      {/* For INPUTS */}
-        <Input value ="" handleChange={event => console.log("event value changes", event)}/>
-  
-    </div>
+      {/* 2nd Variation: When you need the click handler to passed into click handler */}
+      <Button
+        handleClick2={(event, id) => {
+          console.log("Button Clicked", event, id);
+        }}
+      />
 
+      {/* For INPUTS */}
+      <Input
+        value=""
+        handleChange={(event) => console.log("event value changes", event)}
+      />
+
+      <StyledContainer styles={{border:'1px solid black', padding:'1rem', display: 'block'}} />
+    </div>
   );
 }
 
